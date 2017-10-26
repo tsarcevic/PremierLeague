@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PremierLeague</string>
+    <string name="welcome_screen_text">Welcome to the Premier League app! Please press the Forward button to proceed</string>
 </resources>
