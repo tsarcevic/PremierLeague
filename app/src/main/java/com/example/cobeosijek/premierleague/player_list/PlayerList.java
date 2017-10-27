@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import com.example.cobeosijek.premierleague.R;
 import com.example.cobeosijek.premierleague.interfaces.ItemClickListener;
 import com.example.cobeosijek.premierleague.player_info.PlayerInfo;
+import com.example.cobeosijek.premierleague.team_list.TeamListAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,12 +27,14 @@ public class PlayerList extends AppCompatActivity implements ItemClickListener {
     TextView toolbarText;
 
     @BindView(R.id.player_recycler)
-    RecyclerView playerRecycler;
+    RecyclerView playerList;
 
     @BindView(R.id.back_button)
     ImageView backButton;
 
     private int teamId;
+
+    PlayerListAdapter playerListAdapter;
 
     public static Intent getLaunchIntent(Context from, int teamId) {
         Intent intent = new Intent(from, PlayerList.class);
@@ -43,8 +48,24 @@ public class PlayerList extends AppCompatActivity implements ItemClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_list);
 
-        ButterKnife.bind(this);
+        setUI();
         getExtras();
+    }
+
+    private void setUI() {
+        ButterKnife.bind(this);
+
+        playerListAdapter = new PlayerListAdapter();
+        playerListAdapter.setItemClickListener(this);
+        //playerListAdapter.setPlayerList();
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+
+        playerList.addItemDecoration(itemDecoration);
+        playerList.setLayoutManager(layoutManager);
+
+        playerList.setAdapter(playerListAdapter);
     }
 
     private void getExtras() {
