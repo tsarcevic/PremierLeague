@@ -4,7 +4,7 @@ package com.example.cobeosijek.premierleague.models;
  * Created by cobeosijek on 27/10/2017.
  */
 
-public class Team {
+public class Team extends BaseModel {
 
     private int id;
     private String name;
@@ -25,18 +25,18 @@ public class Team {
     }
 
     public String getName() {
-        return name;
+        return getValueOrEmpty(name);
     }
 
     public String getShortName() {
-        return shortName;
+        return getValueOrEmpty(shortName);
     }
 
     public String getSquadMarketValue() {
-        return squadMarketValue;
+        return getValueOrEmpty(squadMarketValue);
     }
 
     public String getCrestUrl() {
-        return crestUrl;
+        return getValueOrEmpty(crestUrl);
     }
 }

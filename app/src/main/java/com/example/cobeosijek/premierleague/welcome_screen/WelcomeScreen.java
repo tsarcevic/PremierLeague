@@ -35,5 +35,7 @@ public class WelcomeScreen extends AppCompatActivity {
     @OnClick(R.id.forward_button)
     public void moveToFirstScreen() {
         startActivity(TeamList.onLaunchIntent(this));
+
+        finish();
     }
 }

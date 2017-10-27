@@ -4,7 +4,7 @@ package com.example.cobeosijek.premierleague.models;
  * Created by cobeosijek on 27/10/2017.
  */
 
-public class Player {
+public class Player extends BaseModel {
 
     private int id;
     private String name;
@@ -27,11 +27,11 @@ public class Player {
     }
 
     public String getName() {
-        return name;
+        return getValueOrEmpty(name);
     }
 
     public String getPosition() {
-        return position;
+        return getValueOrEmpty(position);
     }
 
     public int getJerseyNumber() {
@@ -39,10 +39,10 @@ public class Player {
     }
 
     public String getNationality() {
-        return nationality;
+        return getValueOrEmpty(nationality);
     }
 
     public String getMarketValue() {
-        return marketValue;
+        return getValueOrEmpty(marketValue);
     }
 }

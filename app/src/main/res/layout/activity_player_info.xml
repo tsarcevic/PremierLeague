@@ -30,6 +30,14 @@
             android:padding="16dp"
             android:src="@drawable/ic_back_button" />
 
+        <ImageView
+            android:id="@+id/home_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:padding="16dp"
+            android:src="@drawable/ic_home_button" />
+
     </FrameLayout>
 
     <ScrollView
