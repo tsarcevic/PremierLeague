@@ -1,4 +1,4 @@
-package com.example.cobeosijek.premierleague.models;
+package com.example.cobeosijek.premierleague.data.models;
 
 /**
  * Created by cobeosijek on 27/10/2017.

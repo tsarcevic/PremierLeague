@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import com.example.cobeosijek.premierleague.R;
 import com.example.cobeosijek.premierleague.interfaces.ItemClickListener;
-import com.example.cobeosijek.premierleague.models.Player;
+import com.example.cobeosijek.premierleague.data.models.Player;
 
 import java.util.ArrayList;
 import java.util.List;

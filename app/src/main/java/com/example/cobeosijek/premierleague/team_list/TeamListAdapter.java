@@ -1,14 +1,13 @@
 package com.example.cobeosijek.premierleague.team_list;
 
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.cobeosijek.premierleague.R;
 import com.example.cobeosijek.premierleague.interfaces.ItemClickListener;
-import com.example.cobeosijek.premierleague.models.Team;
+import com.example.cobeosijek.premierleague.data.models.Team;
 
 import java.util.ArrayList;
 import java.util.List;

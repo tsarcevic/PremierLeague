@@ -2,13 +2,12 @@ package com.example.cobeosijek.premierleague.team_list;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.cobeosijek.premierleague.R;
 import com.example.cobeosijek.premierleague.interfaces.ItemClickListener;
-import com.example.cobeosijek.premierleague.models.Team;
+import com.example.cobeosijek.premierleague.data.models.Team;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
