@@ -6,32 +6,28 @@ package com.example.cobeosijek.premierleague.data.models;
 
 public class Player extends BaseModel {
 
-    private int id;
     private String name;
     private String position;
     private int jerseyNumber;
     private String nationality;
-    private String marketValue;
+    private String dateOfBirth;
+    private String contractUntil;
 
-    public Player(int id, String name, String position, int jerseyNumber, String nationality, String marketValue) {
-        this.id = id;
+    public Player(String name, String position, int jerseyNumber, String nationality, String dateOfBirth, String contractUntil) {
         this.name = name;
         this.position = position;
         this.jerseyNumber = jerseyNumber;
         this.nationality = nationality;
-        this.marketValue = marketValue;
-    }
-
-    public int getId() {
-        return id;
+        this.dateOfBirth = dateOfBirth;
+        this.contractUntil = contractUntil;
     }
 
     public String getName() {
-        return getValueOrEmpty(name);
+        return name;
     }
 
     public String getPosition() {
-        return getValueOrEmpty(position);
+        return position;
     }
 
     public int getJerseyNumber() {
@@ -39,10 +35,14 @@ public class Player extends BaseModel {
     }
 
     public String getNationality() {
-        return getValueOrEmpty(nationality);
+        return nationality;
     }
 
-    public String getMarketValue() {
-        return getValueOrEmpty(marketValue);
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public String getContractUntil() {
+        return contractUntil;
     }
 }

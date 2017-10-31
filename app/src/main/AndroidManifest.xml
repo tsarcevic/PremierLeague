@@ -20,7 +20,7 @@
         </activity>
         <activity android:name=".team_list.TeamListActivity" />
         <activity android:name=".player_list.PlayerListActivity" />
-        <activity android:name=".player_info.PlayerInfo"></activity>
+        <activity android:name=".player_info.PlayerInfoActivity"></activity>
     </application>
 
 </manifest>

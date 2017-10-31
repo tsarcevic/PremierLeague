@@ -19,6 +19,7 @@ import com.example.cobeosijek.premierleague.data.response.PlayersResponse;
 import com.example.cobeosijek.premierleague.interfaces.ItemClickListener;
 import com.example.cobeosijek.premierleague.networking.ApiService;
 import com.example.cobeosijek.premierleague.networking.BackendFactory;
+import com.example.cobeosijek.premierleague.player_info.PlayerInfoActivity;
 
 import java.util.List;
 
@@ -129,7 +130,6 @@ public class PlayerListActivity extends AppCompatActivity implements ItemClickLi
 
     @Override
     public void onItemClicked(int position) {
-        Toast.makeText(this, "" + position, Toast.LENGTH_SHORT).show();
-        //startActivity(PlayerInfo.getLaunchIntent(this, id));
+        startActivity(PlayerInfoActivity.getLaunchIntent(this, playerArrayList.get(position)));
     }
 }

@@ -35,8 +35,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_toEndOf="@id/team_crest"
+        android:background="@color/premier_league_color"
         android:gravity="center"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         tools:text="Short Team Name" />
 
 </RelativeLayout>
