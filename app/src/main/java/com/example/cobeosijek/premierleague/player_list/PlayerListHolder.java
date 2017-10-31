@@ -29,8 +29,6 @@ class PlayerListHolder extends RecyclerView.ViewHolder {
 
     private ItemClickListener itemClickListener;
 
-    private int id;
-
     public PlayerListHolder(View itemView, ItemClickListener itemClickListener) {
         super(itemView);
 
@@ -41,18 +39,16 @@ class PlayerListHolder extends RecyclerView.ViewHolder {
 
     public void setPlayerInfo(Player player) {
         if (player != null) {
-            id = player.getId();
-
             playerName.setText(player.getName());
             playerPosition.setText(player.getPosition());
-            playerNumber.setText(player.getPosition());
+            playerNumber.setText(String.valueOf(player.getJerseyNumber()));
         }
     }
 
     @OnClick
     public void playerClicked() {
         if (itemClickListener != null) {
-            itemClickListener.onItemClicked(id);
+            itemClickListener.onItemClicked(getAdapterPosition());
         }
     }
 }

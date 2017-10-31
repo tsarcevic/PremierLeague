@@ -6,5 +6,5 @@ package com.example.cobeosijek.premierleague.interfaces;
 
 public interface ItemClickListener {
 
-    void onItemClicked(int id);
+    void onItemClicked(int position);
 }

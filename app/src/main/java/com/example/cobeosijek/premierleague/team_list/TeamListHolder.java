@@ -6,9 +6,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.cobeosijek.premierleague.R;
-import com.example.cobeosijek.premierleague.interfaces.ItemClickListener;
 import com.example.cobeosijek.premierleague.data.models.Team;
-import com.squareup.picasso.Picasso;
+import com.example.cobeosijek.premierleague.image.ImageLoader;
+import com.example.cobeosijek.premierleague.interfaces.ItemClickListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,9 +29,6 @@ class TeamListHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.short_team_name)
     TextView shortTeamName;
 
-    @BindView(R.id.market_value)
-    TextView marketValue;
-
     private ItemClickListener itemClickListener;
 
     private int id;
@@ -48,20 +45,17 @@ class TeamListHolder extends RecyclerView.ViewHolder {
         if (team != null) {
             id = team.getId();
 
-            if (team.getCrestUrl() != null && !team.getCrestUrl().isEmpty()) {
-                Picasso.with(teamCrest.getContext()).load(team.getCrestUrl()).into(teamCrest);
-            }
+            ImageLoader.loadCrestImage(teamCrest, team.getCrestUrl());
 
             teamName.setText(team.getName());
             shortTeamName.setText(team.getShortName());
-            marketValue.setText(team.getSquadMarketValue());
         }
     }
 
     @OnClick
     public void teamClicked() {
         if (itemClickListener != null) {
-            itemClickListener.onItemClicked(id);
+            itemClickListener.onItemClicked(getAdapterPosition());
         }
     }
 }

@@ -2,6 +2,7 @@ package com.example.cobeosijek.premierleague.data.response;
 
 import com.example.cobeosijek.premierleague.data.models.Team;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ import java.util.List;
 public class TeamsResponse {
 
     private int count;
-    private List<Team> teams;
+    private List<Team> teams = new ArrayList<>();
 
     public int getCount() {
         return count;

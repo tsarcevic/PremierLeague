@@ -2,12 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/team_crest"
         android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         tools:src="@drawable/ic_premier_league_crest" />
@@ -18,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:layout_toEndOf="@id/team_crest"
         android:gravity="center"
         android:textColor="@color/black"
@@ -32,23 +33,10 @@
         android:layout_below="@id/team_name"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:layout_toEndOf="@id/team_crest"
         android:gravity="center"
         android:textColor="@color/black"
         tools:text="Short Team Name" />
-
-    <TextView
-        android:id="@+id/market_value"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/short_team_name"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_toEndOf="@id/team_crest"
-        android:gravity="center"
-        android:textColor="@color/black"
-        tools:text="Market value" />
 
 </RelativeLayout>

@@ -1,13 +1,12 @@
 package com.example.cobeosijek.premierleague.welcome_screen;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.cobeosijek.premierleague.R;
-import com.example.cobeosijek.premierleague.team_list.TeamList;
+import com.example.cobeosijek.premierleague.team_list.TeamListActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,7 +33,7 @@ public class WelcomeScreen extends AppCompatActivity {
 
     @OnClick(R.id.forward_button)
     public void moveToFirstScreen() {
-        startActivity(TeamList.onLaunchIntent(this));
+        startActivity(TeamListActivity.onLaunchIntent(this));
 
         finish();
     }

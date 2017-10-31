@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.cobeosijek.premierleague.R;
-import com.example.cobeosijek.premierleague.team_list.TeamList;
+import com.example.cobeosijek.premierleague.team_list.TeamListActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -70,6 +70,6 @@ public class PlayerInfo extends AppCompatActivity {
 
     @OnClick(R.id.home_button)
     public void startingPage() {
-        startActivity(TeamList.onLaunchIntent(this));
+        startActivity(TeamListActivity.onLaunchIntent(this));
     }
 }
