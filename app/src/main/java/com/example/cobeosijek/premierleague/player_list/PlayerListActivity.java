@@ -2,15 +2,15 @@ package com.example.cobeosijek.premierleague.player_list;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.cobeosijek.premierleague.R;
 import com.example.cobeosijek.premierleague.data.models.Player;
@@ -20,6 +20,7 @@ import com.example.cobeosijek.premierleague.interfaces.ItemClickListener;
 import com.example.cobeosijek.premierleague.networking.ApiService;
 import com.example.cobeosijek.premierleague.networking.BackendFactory;
 import com.example.cobeosijek.premierleague.player_info.PlayerInfoActivity;
+import com.example.cobeosijek.premierleague.utils.InternetUtils;
 
 import java.util.List;
 
@@ -45,6 +46,12 @@ public class PlayerListActivity extends AppCompatActivity implements ItemClickLi
     @BindView(R.id.back_button)
     ImageView backButton;
 
+    @BindView(R.id.no_internet)
+    TextView noInternetConnection;
+
+    @BindView(R.id.swipe_to_refresh)
+    SwipeRefreshLayout swipeRefreshLayout;
+
     PlayerListAdapter playerListAdapter;
 
     private ApiService apiService;
@@ -68,7 +75,19 @@ public class PlayerListActivity extends AppCompatActivity implements ItemClickLi
         setUI();
         getExtras();
         extractTeamId();
-        obtainPlayerInfo();
+        checkInternetConnection();
+        setSwiping();
+    }
+
+    private void setSwiping() {
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                checkInternetConnection();
+
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     private void setUI() {
@@ -94,7 +113,29 @@ public class PlayerListActivity extends AppCompatActivity implements ItemClickLi
         toolbarText.setText(team.getShortName());
     }
 
+    private int extractTeamId() {
+        String teamId = team.getLinks().getPlayers().getHref();
+
+        String[] segmentSeparator = teamId.split("/");
+
+        teamId = segmentSeparator[segmentSeparator.length - 2];
+
+        return Integer.parseInt(teamId);
+    }
+
+    private void checkInternetConnection() {
+        if (InternetUtils.isNetworkAvailable(this)) {
+            obtainPlayerInfo();
+        } else {
+            noInternetConnection.setVisibility(View.VISIBLE);
+            playerList.setVisibility(View.GONE);
+        }
+    }
+
     private void obtainPlayerInfo() {
+        noInternetConnection.setVisibility(View.GONE);
+        playerList.setVisibility(View.VISIBLE);
+
         retrofit = BackendFactory.setUpRetrofit();
         apiService = BackendFactory.setUpApiService();
 
@@ -111,16 +152,6 @@ public class PlayerListActivity extends AppCompatActivity implements ItemClickLi
                 call.cancel();
             }
         });
-    }
-
-    private int extractTeamId() {
-        String lastSegment = team.getLinks().getPlayers().getHref();
-
-        String[] helpVariable = lastSegment.split("/");
-
-        lastSegment = helpVariable[helpVariable.length - 2];
-
-        return Integer.parseInt(lastSegment);
     }
 
     @OnClick(R.id.back_button)

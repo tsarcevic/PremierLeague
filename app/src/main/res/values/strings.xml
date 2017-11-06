@@ -9,4 +9,5 @@
     <string name="player_name">Name: %s</string>
     <string name="player_birth_date">Date of birth: %s</string>
     <string name="player_contract">Contract: %s</string>
+    <string name="no_internet">No data to show, check internet connection!</string>
 </resources>

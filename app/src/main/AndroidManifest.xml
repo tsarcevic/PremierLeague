@@ -3,6 +3,8 @@
     package="com.example.cobeosijek.premierleague">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:allowBackup="true"
@@ -11,16 +13,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".welcome_screen.WelcomeScreen">
+        <activity
+            android:name=".welcome_screen.WelcomeScreen"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".team_list.TeamListActivity" />
-        <activity android:name=".player_list.PlayerListActivity" />
-        <activity android:name=".player_info.PlayerInfoActivity"></activity>
+        <activity
+            android:name=".team_list.TeamListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".player_list.PlayerListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".player_info.PlayerInfoActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
