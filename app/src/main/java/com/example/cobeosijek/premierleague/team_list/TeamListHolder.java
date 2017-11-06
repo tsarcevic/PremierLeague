@@ -31,8 +31,6 @@ class TeamListHolder extends RecyclerView.ViewHolder {
 
     private ItemClickListener itemClickListener;
 
-    private int id;
-
     public TeamListHolder(View itemView, ItemClickListener itemClickListener) {
         super(itemView);
 
@@ -43,10 +41,7 @@ class TeamListHolder extends RecyclerView.ViewHolder {
 
     public void setTeamInfo(Team team) {
         if (team != null) {
-            id = team.getId();
-
             ImageLoader.loadCrestImage(teamCrest, team.getCrestUrl());
-
             teamName.setText(team.getName());
             shortTeamName.setText(team.getShortName());
         }

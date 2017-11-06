@@ -8,9 +8,9 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cobeosijek.premierleague.R;
 import com.example.cobeosijek.premierleague.data.models.Player;
@@ -20,7 +20,6 @@ import com.example.cobeosijek.premierleague.interfaces.ItemClickListener;
 import com.example.cobeosijek.premierleague.networking.ApiService;
 import com.example.cobeosijek.premierleague.networking.BackendFactory;
 import com.example.cobeosijek.premierleague.player_info.PlayerInfoActivity;
-import com.example.cobeosijek.premierleague.utils.InternetUtils;
 
 import java.util.List;
 
@@ -32,7 +31,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class PlayerListActivity extends AppCompatActivity implements ItemClickListener {
+public class PlayerListActivity extends AppCompatActivity implements ItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     private static String KEY_TEAM_NAME_PLAYER_LIST = "team_name";
     private static String KEY_ID_PLAYER_LIST = "id";
@@ -46,9 +45,6 @@ public class PlayerListActivity extends AppCompatActivity implements ItemClickLi
     @BindView(R.id.back_button)
     ImageView backButton;
 
-    @BindView(R.id.no_internet)
-    TextView noInternetConnection;
-
     @BindView(R.id.swipe_to_refresh)
     SwipeRefreshLayout swipeRefreshLayout;
 
@@ -56,6 +52,7 @@ public class PlayerListActivity extends AppCompatActivity implements ItemClickLi
 
     private ApiService apiService;
     private Retrofit retrofit;
+
     private List<Player> playerArrayList;
 
     Team team;
@@ -74,24 +71,13 @@ public class PlayerListActivity extends AppCompatActivity implements ItemClickLi
 
         setUI();
         getExtras();
-        extractTeamId();
-        checkInternetConnection();
-        setSwiping();
-    }
-
-    private void setSwiping() {
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                checkInternetConnection();
-
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        });
+        obtainPlayerInfo();
     }
 
     private void setUI() {
         ButterKnife.bind(this);
+
+        swipeRefreshLayout.setOnRefreshListener(this);
 
         playerListAdapter = new PlayerListAdapter();
         playerListAdapter.setItemClickListener(this);
@@ -113,29 +99,7 @@ public class PlayerListActivity extends AppCompatActivity implements ItemClickLi
         toolbarText.setText(team.getShortName());
     }
 
-    private int extractTeamId() {
-        String teamId = team.getLinks().getPlayers().getHref();
-
-        String[] segmentSeparator = teamId.split("/");
-
-        teamId = segmentSeparator[segmentSeparator.length - 2];
-
-        return Integer.parseInt(teamId);
-    }
-
-    private void checkInternetConnection() {
-        if (InternetUtils.isNetworkAvailable(this)) {
-            obtainPlayerInfo();
-        } else {
-            noInternetConnection.setVisibility(View.VISIBLE);
-            playerList.setVisibility(View.GONE);
-        }
-    }
-
     private void obtainPlayerInfo() {
-        noInternetConnection.setVisibility(View.GONE);
-        playerList.setVisibility(View.VISIBLE);
-
         retrofit = BackendFactory.setUpRetrofit();
         apiService = BackendFactory.setUpApiService();
 
@@ -150,8 +114,17 @@ public class PlayerListActivity extends AppCompatActivity implements ItemClickLi
             @Override
             public void onFailure(Call<PlayersResponse> call, Throwable t) {
                 call.cancel();
+                Toast.makeText(PlayerListActivity.this, R.string.no_internet_connection, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private int extractTeamId() {
+        String teamId = team.getLinks().getPlayers().getHref();
+        String[] segmentSeparator = teamId.split("/");
+        teamId = segmentSeparator[segmentSeparator.length - 2];
+
+        return Integer.parseInt(teamId);
     }
 
     @OnClick(R.id.back_button)
@@ -162,5 +135,12 @@ public class PlayerListActivity extends AppCompatActivity implements ItemClickLi
     @Override
     public void onItemClicked(int position) {
         startActivity(PlayerInfoActivity.getLaunchIntent(this, playerArrayList.get(position)));
+    }
+
+    @Override
+    public void onRefresh() {
+        obtainPlayerInfo();
+
+        swipeRefreshLayout.setRefreshing(false);
     }
 }

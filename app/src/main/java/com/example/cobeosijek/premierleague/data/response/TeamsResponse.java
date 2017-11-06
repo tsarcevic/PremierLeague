@@ -12,6 +12,7 @@ import java.util.List;
 public class TeamsResponse {
 
     private int count;
+
     private List<Team> teams = new ArrayList<>();
 
     public int getCount() {

@@ -8,8 +8,8 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cobeosijek.premierleague.R;
 import com.example.cobeosijek.premierleague.data.models.Team;
@@ -18,7 +18,6 @@ import com.example.cobeosijek.premierleague.interfaces.ItemClickListener;
 import com.example.cobeosijek.premierleague.networking.ApiService;
 import com.example.cobeosijek.premierleague.networking.BackendFactory;
 import com.example.cobeosijek.premierleague.player_list.PlayerListActivity;
-import com.example.cobeosijek.premierleague.utils.InternetUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,16 +29,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class TeamListActivity extends AppCompatActivity implements ItemClickListener {
+public class TeamListActivity extends AppCompatActivity implements ItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.toolbar_text)
     TextView toolbarText;
 
     @BindView(R.id.team_recycler)
     RecyclerView teamList;
-
-    @BindView(R.id.no_internet)
-    TextView noInternetConnection;
 
     @BindView(R.id.swipe_to_refresh)
     SwipeRefreshLayout swipeRefreshLayout;
@@ -61,12 +57,13 @@ public class TeamListActivity extends AppCompatActivity implements ItemClickList
         setContentView(R.layout.activity_team_list);
 
         setUI();
-        checkInternetConnection();
-        setSwiping();
+        obtainTeamInfo();
     }
 
     private void setUI() {
         ButterKnife.bind(this);
+
+        swipeRefreshLayout.setOnRefreshListener(this);
 
         teamListAdapter = new TeamListAdapter();
         teamListAdapter.setItemClickListener(this);
@@ -80,30 +77,7 @@ public class TeamListActivity extends AppCompatActivity implements ItemClickList
         teamList.setAdapter(teamListAdapter);
     }
 
-    private void setSwiping() {
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                checkInternetConnection();
-
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        });
-    }
-
-    private void checkInternetConnection() {
-        if (InternetUtils.isNetworkAvailable(this)) {
-            obtainTeamInfo();
-        } else {
-            noInternetConnection.setVisibility(View.VISIBLE);
-            teamList.setVisibility(View.GONE);
-        }
-    }
-
     private void obtainTeamInfo() {
-        teamList.setVisibility(View.VISIBLE);
-        noInternetConnection.setVisibility(View.GONE);
-
         retrofit = BackendFactory.setUpRetrofit();
         apiService = BackendFactory.setUpApiService();
 
@@ -118,6 +92,7 @@ public class TeamListActivity extends AppCompatActivity implements ItemClickList
             @Override
             public void onFailure(Call<TeamsResponse> call, Throwable t) {
                 call.cancel();
+                Toast.makeText(TeamListActivity.this, R.string.no_internet_connection, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -125,5 +100,12 @@ public class TeamListActivity extends AppCompatActivity implements ItemClickList
     @Override
     public void onItemClicked(int position) {
         startActivity(PlayerListActivity.getLaunchIntent(this, teamArrayList.get(position)));
+    }
+
+    @Override
+    public void onRefresh() {
+        obtainTeamInfo();
+
+        swipeRefreshLayout.setRefreshing(false);
     }
 }

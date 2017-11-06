@@ -4,7 +4,6 @@ import com.example.cobeosijek.premierleague.data.response.PlayersResponse;
 import com.example.cobeosijek.premierleague.data.response.TeamsResponse;
 
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
@@ -18,6 +17,5 @@ public interface ApiService {
     Call<TeamsResponse> getAllTeams();
 
     @GET("teams/{id}/players")
-    Call<PlayersResponse> getTeamPlayers(@Path(value = "id") int id);
-
+    Call<PlayersResponse> getTeamPlayers(@Path("id") int id);
 }

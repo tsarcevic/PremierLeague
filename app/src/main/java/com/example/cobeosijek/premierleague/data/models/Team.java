@@ -10,7 +10,6 @@ import java.io.Serializable;
 
 public class Team extends BaseModel {
 
-
     @SerializedName("_links")
     private DataLinks links;
     private int id;
@@ -26,10 +25,6 @@ public class Team extends BaseModel {
         this.shortName = shortName;
         this.squadMarketValue = squadMarketValue;
         this.crestUrl = crestUrl;
-    }
-
-    public Team() {
-
     }
 
     public DataLinks getLinks() {

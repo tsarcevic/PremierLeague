@@ -29,7 +29,6 @@ public class BackendFactory {
                     .client(client)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
-
         }
 
         return retrofit;

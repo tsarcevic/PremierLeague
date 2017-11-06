@@ -12,6 +12,7 @@ import java.util.List;
 public class PlayersResponse {
 
     private int count;
+
     private List<Player> players = new ArrayList<>();
 
     public int getCount() {

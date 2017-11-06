@@ -84,7 +84,7 @@ public class PlayerInfoActivity extends AppCompatActivity {
 
     @OnClick(R.id.home_button)
     public void startingPage() {
-        startActivity(TeamListActivity.onLaunchIntent(this));
+        startActivity(TeamListActivity.onLaunchIntent(this).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         finish();
     }
 }
