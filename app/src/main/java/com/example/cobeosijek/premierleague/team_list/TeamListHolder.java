@@ -2,6 +2,7 @@ package com.example.cobeosijek.premierleague.team_list;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -10,6 +11,7 @@ import com.example.cobeosijek.premierleague.data.models.Team;
 import com.example.cobeosijek.premierleague.image.ImageLoader;
 import com.example.cobeosijek.premierleague.interfaces.ItemClickListener;
 
+import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -28,6 +30,15 @@ class TeamListHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.short_team_name)
     TextView shortTeamName;
+
+    @BindView(R.id.root_view)
+    ViewGroup root;
+
+    @BindColor(R.color.gray)
+    int grayColor;
+
+    @BindColor(R.color.white)
+    int whiteColor;
 
     private ItemClickListener itemClickListener;
 
@@ -52,5 +63,13 @@ class TeamListHolder extends RecyclerView.ViewHolder {
         if (itemClickListener != null) {
             itemClickListener.onItemClicked(getAdapterPosition());
         }
+    }
+
+    public void setGray() {
+        root.setBackgroundColor(grayColor);
+    }
+
+    public void setWhite() {
+        root.setBackgroundColor(whiteColor);
     }
 }

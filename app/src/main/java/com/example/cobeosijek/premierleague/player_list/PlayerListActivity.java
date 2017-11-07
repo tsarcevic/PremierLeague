@@ -51,7 +51,6 @@ public class PlayerListActivity extends AppCompatActivity implements ItemClickLi
     PlayerListAdapter playerListAdapter;
 
     private ApiService apiService;
-    private Retrofit retrofit;
 
     private List<Player> playerArrayList;
 
@@ -83,9 +82,7 @@ public class PlayerListActivity extends AppCompatActivity implements ItemClickLi
         playerListAdapter.setItemClickListener(this);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
 
-        playerList.addItemDecoration(itemDecoration);
         playerList.setLayoutManager(layoutManager);
 
         playerList.setAdapter(playerListAdapter);
@@ -100,7 +97,6 @@ public class PlayerListActivity extends AppCompatActivity implements ItemClickLi
     }
 
     private void obtainPlayerInfo() {
-        retrofit = BackendFactory.setUpRetrofit();
         apiService = BackendFactory.setUpApiService();
 
         Call<PlayersResponse> call = apiService.getTeamPlayers(extractTeamId());
@@ -109,12 +105,14 @@ public class PlayerListActivity extends AppCompatActivity implements ItemClickLi
             public void onResponse(Call<PlayersResponse> call, Response<PlayersResponse> response) {
                 playerArrayList = response.body().getPlayers();
                 playerListAdapter.setPlayerList(playerArrayList);
+                swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
             public void onFailure(Call<PlayersResponse> call, Throwable t) {
                 call.cancel();
                 Toast.makeText(PlayerListActivity.this, R.string.no_internet_connection, Toast.LENGTH_SHORT).show();
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
     }
@@ -141,6 +139,6 @@ public class PlayerListActivity extends AppCompatActivity implements ItemClickLi
     public void onRefresh() {
         obtainPlayerInfo();
 
-        swipeRefreshLayout.setRefreshing(false);
+        swipeRefreshLayout.setRefreshing(true);
     }
 }

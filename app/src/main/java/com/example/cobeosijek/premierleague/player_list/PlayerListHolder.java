@@ -2,12 +2,14 @@ package com.example.cobeosijek.premierleague.player_list;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.cobeosijek.premierleague.R;
 import com.example.cobeosijek.premierleague.interfaces.ItemClickListener;
 import com.example.cobeosijek.premierleague.data.models.Player;
 
+import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -26,6 +28,15 @@ class PlayerListHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.player_number)
     TextView playerNumber;
+
+    @BindView(R.id.root_view)
+    ViewGroup root;
+
+    @BindColor(R.color.gray)
+    int grayColor;
+
+    @BindColor(R.color.white)
+    int whiteColor;
 
     private ItemClickListener itemClickListener;
 
@@ -50,5 +61,13 @@ class PlayerListHolder extends RecyclerView.ViewHolder {
         if (itemClickListener != null) {
             itemClickListener.onItemClicked(getAdapterPosition());
         }
+    }
+
+    public void setGray() {
+        root.setBackgroundColor(grayColor);
+    }
+
+    public void setWhite() {
+        root.setBackgroundColor(whiteColor);
     }
 }

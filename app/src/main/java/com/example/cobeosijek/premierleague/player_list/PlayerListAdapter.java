@@ -49,6 +49,11 @@ public class PlayerListAdapter extends RecyclerView.Adapter<PlayerListHolder> {
         Player player = playerList.get(position);
 
         holder.setPlayerInfo(player);
+        if (position % 2 == 1) {
+            holder.setGray();
+        } else {
+            holder.setWhite();
+        }
 
     }
 

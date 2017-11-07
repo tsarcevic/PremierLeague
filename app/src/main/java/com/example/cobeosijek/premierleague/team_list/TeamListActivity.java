@@ -2,9 +2,9 @@ package com.example.cobeosijek.premierleague.team_list;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,7 +27,6 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class TeamListActivity extends AppCompatActivity implements ItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
@@ -45,7 +44,6 @@ public class TeamListActivity extends AppCompatActivity implements ItemClickList
     List<Team> teamArrayList = new ArrayList<>();
 
     private ApiService apiService;
-    private Retrofit retrofit;
 
     public static Intent onLaunchIntent(Context from) {
         return new Intent(from, TeamListActivity.class);
@@ -69,16 +67,13 @@ public class TeamListActivity extends AppCompatActivity implements ItemClickList
         teamListAdapter.setItemClickListener(this);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
 
-        teamList.addItemDecoration(itemDecoration);
         teamList.setLayoutManager(layoutManager);
 
         teamList.setAdapter(teamListAdapter);
     }
 
     private void obtainTeamInfo() {
-        retrofit = BackendFactory.setUpRetrofit();
         apiService = BackendFactory.setUpApiService();
 
         Call<TeamsResponse> call = apiService.getAllTeams();
@@ -87,12 +82,14 @@ public class TeamListActivity extends AppCompatActivity implements ItemClickList
             public void onResponse(Call<TeamsResponse> call, Response<TeamsResponse> response) {
                 teamArrayList = response.body().getTeams();
                 teamListAdapter.setTeamList(teamArrayList);
+                swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
             public void onFailure(Call<TeamsResponse> call, Throwable t) {
                 call.cancel();
                 Toast.makeText(TeamListActivity.this, R.string.no_internet_connection, Toast.LENGTH_SHORT).show();
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
     }
@@ -106,6 +103,6 @@ public class TeamListActivity extends AppCompatActivity implements ItemClickList
     public void onRefresh() {
         obtainTeamInfo();
 
-        swipeRefreshLayout.setRefreshing(false);
+        swipeRefreshLayout.setRefreshing(true);
     }
 }

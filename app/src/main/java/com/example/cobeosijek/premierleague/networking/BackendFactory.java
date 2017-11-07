@@ -1,5 +1,7 @@
 package com.example.cobeosijek.premierleague.networking;
 
+import android.util.Log;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -17,9 +19,8 @@ public class BackendFactory {
 
     private static ApiService apiService;
 
-    public static Retrofit setUpRetrofit() {
+    private static Retrofit setUpRetrofit() {
         if (retrofit == null) {
-
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
@@ -36,7 +37,7 @@ public class BackendFactory {
 
     public static ApiService setUpApiService() {
         if (apiService == null) {
-            apiService = retrofit.create(ApiService.class);
+            apiService = setUpRetrofit().create(ApiService.class);
         }
 
         return apiService;

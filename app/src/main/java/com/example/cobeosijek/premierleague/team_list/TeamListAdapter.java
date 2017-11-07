@@ -49,6 +49,13 @@ public class TeamListAdapter extends RecyclerView.Adapter<TeamListHolder> {
         Team team = teamList.get(position);
 
         holder.setTeamInfo(team);
+
+        if (position % 2 == 1) {
+            holder.setGray();
+        } else {
+            holder.setWhite();
+        }
+
     }
 
     @Override
