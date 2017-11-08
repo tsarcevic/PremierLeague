@@ -27,6 +27,9 @@ public class Team extends BaseModel {
         this.crestUrl = crestUrl;
     }
 
+    public Team() {
+    }
+
     public DataLinks getLinks() {
         return links;
     }

@@ -1,7 +1,5 @@
 package com.example.cobeosijek.premierleague.networking;
 
-import android.util.Log;
-
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
