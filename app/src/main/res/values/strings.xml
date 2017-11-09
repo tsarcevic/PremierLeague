@@ -4,7 +4,7 @@
     <string name="team_list">Team list</string>
     <string name="player_info">Player info</string>
     <string name="player_nationality">Nationality: %s</string>
-    <string name="player_number">Number: %d</string>
+    <string name="player_number">Number: %s</string>
     <string name="player_position">Position: %s</string>
     <string name="player_name">Name: %s</string>
     <string name="player_birth_date">Date of birth: %s</string>

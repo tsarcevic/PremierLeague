@@ -12,10 +12,12 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import retrofit2.Callback;
 
+import static junit.framework.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by cobeosijek on 08/11/2017.
@@ -83,6 +85,9 @@ public class TeamListPresenterTest {
     }
 
     @Test
-    public void testListenerResponse() throws Exception {
+    public void testFetchTeamList() throws Exception {
+        presenter.fetchTeamList();
+        verify(networkInterface).getAllTeams(any(Callback.class));
+        verifyNoMoreInteractions(view, networkInterface);
     }
 }

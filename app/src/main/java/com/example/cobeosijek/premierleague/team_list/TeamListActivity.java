@@ -83,7 +83,7 @@ public class TeamListActivity extends AppCompatActivity implements TeamListInter
 
     @Override
     public void showConnectionError() {
-        Toast.makeText(TeamListActivity.this, R.string.no_internet_connection, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), R.string.no_internet_connection, Toast.LENGTH_SHORT).show();
     }
 
     @Override

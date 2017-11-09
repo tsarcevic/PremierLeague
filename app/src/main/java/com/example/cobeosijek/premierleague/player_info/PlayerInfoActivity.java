@@ -15,7 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class PlayerInfoActivity extends AppCompatActivity {
+public class PlayerInfoActivity extends AppCompatActivity implements PlayerInfoInterface.View {
 
     private static String KEY_PLAYER_PLAYER_INFO = "id";
 
@@ -43,7 +43,7 @@ public class PlayerInfoActivity extends AppCompatActivity {
     @BindView(R.id.back_button)
     ImageView backButton;
 
-    private Player player;
+    PlayerInfoInterface.Presenter presenter;
 
     public static Intent getLaunchIntent(Context from, Player player) {
         Intent intent = new Intent(from, PlayerInfoActivity.class);
@@ -58,33 +58,68 @@ public class PlayerInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_player_info);
 
         ButterKnife.bind(this);
+
+        presenter = new PlayerInfoPresenter();
+        presenter.setView(this);
+
         getExtras();
-        insertText();
     }
 
     private void getExtras() {
         if (getIntent().hasExtra(KEY_PLAYER_PLAYER_INFO)) {
-            player = (Player) getIntent().getSerializableExtra(KEY_PLAYER_PLAYER_INFO);
+            Player player = (Player) getIntent().getSerializableExtra(KEY_PLAYER_PLAYER_INFO);
+            presenter.setPlayer(player);
         }
-    }
-
-    private void insertText() {
-        playerName.setText(String.format(getString(R.string.player_name), player.getName()));
-        playerNationality.setText(String.format(getString(R.string.player_nationality), player.getNationality()));
-        playerJerseyNumber.setText(String.format(getString(R.string.player_number), player.getJerseyNumber()));
-        playerPosition.setText(String.format(getString(R.string.player_position), player.getPosition()));
-        playerBirthDate.setText(String.format(getString(R.string.player_birth_date), player.getDateOfBirth()));
-        playerContract.setText(String.format(getString(R.string.player_contract), player.getContractUntil()));
     }
 
     @OnClick(R.id.back_button)
     public void returnBack() {
-        onBackPressed();
+        presenter.backPressed();
+    }
+
+    @Override
+    public void navigateBack() {
+        finish();
     }
 
     @OnClick(R.id.home_button)
     public void startingPage() {
+        presenter.homePressed();
+    }
+
+    @Override
+    public void navigateHome() {
         startActivity(TeamListActivity.onLaunchIntent(this).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         finish();
+    }
+
+    @Override
+    public void setPlayerName(String name) {
+        playerName.setText(String.format(getString(R.string.player_name), name));
+    }
+
+    @Override
+    public void setPlayerNationality(String nationality) {
+        playerNationality.setText(String.format(getString(R.string.player_nationality), nationality));
+    }
+
+    @Override
+    public void setPlayerNumber(String jerseyNumber) {
+        playerJerseyNumber.setText(String.format(getString(R.string.player_number), jerseyNumber));
+    }
+
+    @Override
+    public void setPlayerBirthDate(String dateOfBirth) {
+        playerBirthDate.setText(String.format(getString(R.string.player_birth_date), dateOfBirth));
+    }
+
+    @Override
+    public void setPlayerPosition(String position) {
+        playerPosition.setText(String.format(getString(R.string.player_position), position));
+    }
+
+    @Override
+    public void setPlayerContract(String contractUntil) {
+        playerContract.setText(String.format(getString(R.string.player_contract), contractUntil));
     }
 }

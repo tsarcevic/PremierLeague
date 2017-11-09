@@ -1,5 +1,6 @@
 package com.example.cobeosijek.premierleague.networking;
 
+import com.example.cobeosijek.premierleague.data.response.PlayersResponse;
 import com.example.cobeosijek.premierleague.data.response.TeamsResponse;
 
 import retrofit2.Callback;
@@ -11,4 +12,6 @@ import retrofit2.Callback;
 public interface NetworkInterface {
 
     void getAllTeams(Callback<TeamsResponse> teamListener);
+
+    void getTeamPlayers(Callback<PlayersResponse> playersListener, int teamId);
 }
