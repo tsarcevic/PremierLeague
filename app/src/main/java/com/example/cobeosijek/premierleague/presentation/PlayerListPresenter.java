@@ -1,9 +1,10 @@
-package com.example.cobeosijek.premierleague.player_list;
+package com.example.cobeosijek.premierleague.presentation;
 
 import com.example.cobeosijek.premierleague.data.models.Player;
 import com.example.cobeosijek.premierleague.data.models.Team;
 import com.example.cobeosijek.premierleague.data.response.PlayersResponse;
 import com.example.cobeosijek.premierleague.networking.NetworkInterface;
+import com.example.cobeosijek.premierleague.ui.player_list.PlayerListInterface;
 import com.example.cobeosijek.premierleague.utils.StringUtils;
 
 import java.util.ArrayList;

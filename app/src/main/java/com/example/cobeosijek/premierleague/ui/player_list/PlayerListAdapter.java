@@ -1,4 +1,4 @@
-package com.example.cobeosijek.premierleague.player_list;
+package com.example.cobeosijek.premierleague.ui.player_list;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

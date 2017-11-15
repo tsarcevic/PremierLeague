@@ -1,6 +1,7 @@
-package com.example.cobeosijek.premierleague.player_info;
+package com.example.cobeosijek.premierleague.presentation;
 
 import com.example.cobeosijek.premierleague.data.models.Player;
+import com.example.cobeosijek.premierleague.ui.player_info.PlayerInfoInterface;
 
 /**
  * Created by cobeosijek on 09/11/2017.
@@ -32,11 +33,13 @@ public class PlayerInfoPresenter implements PlayerInfoInterface.Presenter {
 
     @Override
     public void setPlayer(Player player) {
-        view.setPlayerName(player.getName());
-        view.setPlayerNationality(player.getNationality());
-        view.setPlayerNumber(String.valueOf(player.getJerseyNumber()));
-        view.setPlayerBirthDate(player.getDateOfBirth());
-        view.setPlayerPosition(player.getPosition());
-        view.setPlayerContract(player.getContractUntil());
+        if (player != null) {
+            view.setPlayerName(player.getName());
+            view.setPlayerNationality(player.getNationality());
+            view.setPlayerNumber(String.valueOf(player.getJerseyNumber()));
+            view.setPlayerBirthDate(player.getDateOfBirth());
+            view.setPlayerPosition(player.getPosition());
+            view.setPlayerContract(player.getContractUntil());
+        }
     }
 }

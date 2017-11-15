@@ -1,4 +1,4 @@
-package com.example.cobeosijek.premierleague.player_list;
+package com.example.cobeosijek.premierleague.ui.player_list;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,7 +16,8 @@ import com.example.cobeosijek.premierleague.data.models.Player;
 import com.example.cobeosijek.premierleague.data.models.Team;
 import com.example.cobeosijek.premierleague.interfaces.ItemClickListener;
 import com.example.cobeosijek.premierleague.networking.NetworkManager;
-import com.example.cobeosijek.premierleague.player_info.PlayerInfoActivity;
+import com.example.cobeosijek.premierleague.ui.player_info.PlayerInfoView;
+import com.example.cobeosijek.premierleague.presentation.PlayerListPresenter;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class PlayerListActivity extends AppCompatActivity implements PlayerListInterface.View, ItemClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class PlayerListView extends AppCompatActivity implements PlayerListInterface.View, ItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     private static String KEY_TEAM_NAME_PLAYER_LIST = "team_name";
 
@@ -45,7 +46,7 @@ public class PlayerListActivity extends AppCompatActivity implements PlayerListI
     PlayerListInterface.Presenter presenter;
 
     public static Intent getLaunchIntent(Context from, Team team) {
-        Intent intent = new Intent(from, PlayerListActivity.class);
+        Intent intent = new Intent(from, PlayerListView.class);
         intent.putExtra(KEY_TEAM_NAME_PLAYER_LIST, team);
 
         return intent;
@@ -140,6 +141,6 @@ public class PlayerListActivity extends AppCompatActivity implements PlayerListI
 
     @Override
     public void openPlayerDetails(Player player) {
-        startActivity(PlayerInfoActivity.getLaunchIntent(this, player));
+        startActivity(PlayerInfoView.getLaunchIntent(this, player));
     }
 }

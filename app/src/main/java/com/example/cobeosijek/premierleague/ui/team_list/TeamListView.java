@@ -1,4 +1,4 @@
-package com.example.cobeosijek.premierleague.team_list;
+package com.example.cobeosijek.premierleague.ui.team_list;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,16 +13,16 @@ import android.widget.Toast;
 import com.example.cobeosijek.premierleague.R;
 import com.example.cobeosijek.premierleague.data.models.Team;
 import com.example.cobeosijek.premierleague.interfaces.ItemClickListener;
-import com.example.cobeosijek.premierleague.networking.BackendFactory;
 import com.example.cobeosijek.premierleague.networking.NetworkManager;
-import com.example.cobeosijek.premierleague.player_list.PlayerListActivity;
+import com.example.cobeosijek.premierleague.ui.player_list.PlayerListView;
+import com.example.cobeosijek.premierleague.presentation.TeamListPresenter;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class TeamListActivity extends AppCompatActivity implements TeamListInterface.View, ItemClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class TeamListView extends AppCompatActivity implements TeamListInterface.View, ItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.toolbar_text)
     TextView toolbarText;
@@ -38,7 +38,7 @@ public class TeamListActivity extends AppCompatActivity implements TeamListInter
 
 
     public static Intent onLaunchIntent(Context from) {
-        return new Intent(from, TeamListActivity.class);
+        return new Intent(from, TeamListView.class);
     }
 
     @Override
@@ -98,6 +98,6 @@ public class TeamListActivity extends AppCompatActivity implements TeamListInter
 
     @Override
     public void openTeamDetails(Team team) {
-        startActivity(PlayerListActivity.getLaunchIntent(this, team));
+        startActivity(PlayerListView.getLaunchIntent(this, team));
     }
 }

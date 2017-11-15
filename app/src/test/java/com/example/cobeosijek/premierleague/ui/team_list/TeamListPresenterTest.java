@@ -1,8 +1,9 @@
-package com.example.cobeosijek.premierleague.team_list;
+package com.example.cobeosijek.premierleague.ui.team_list;
 
 import com.example.cobeosijek.premierleague.TestUtils;
 import com.example.cobeosijek.premierleague.data.models.Team;
 import com.example.cobeosijek.premierleague.networking.NetworkInterface;
+import com.example.cobeosijek.premierleague.presentation.TeamListPresenter;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +18,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
-import static org.mockito.Mockito.when;
 
 /**
  * Created by cobeosijek on 08/11/2017.

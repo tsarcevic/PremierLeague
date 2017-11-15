@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.cobeosijek.premierleague.player_list.PlayerListActivity">
+    tools:context=".ui.player_list.PlayerListView">
 
     <RelativeLayout
         android:layout_width="match_parent"

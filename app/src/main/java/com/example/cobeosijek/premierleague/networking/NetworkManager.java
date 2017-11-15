@@ -15,7 +15,7 @@ public class NetworkManager implements NetworkInterface {
     private final ApiService apiService;
 
     public NetworkManager() {
-        apiService = BackendFactory.setUpApiService();
+        apiService = BackendFactory.getApiServiceInstance();
     }
 
     public static NetworkInterface get() {

@@ -1,4 +1,4 @@
-package com.example.cobeosijek.premierleague.player_list;
+package com.example.cobeosijek.premierleague.ui.player_list;
 
 import com.example.cobeosijek.premierleague.data.models.Player;
 import com.example.cobeosijek.premierleague.data.models.Team;

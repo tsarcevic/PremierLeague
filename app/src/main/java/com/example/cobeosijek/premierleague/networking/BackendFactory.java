@@ -17,7 +17,7 @@ public class BackendFactory {
 
     private static ApiService apiService;
 
-    private static Retrofit setUpRetrofit() {
+    private static Retrofit getRetrofitInstance() {
         if (retrofit == null) {
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -33,9 +33,9 @@ public class BackendFactory {
         return retrofit;
     }
 
-    public static ApiService setUpApiService() {
+    static ApiService getApiServiceInstance() {
         if (apiService == null) {
-            apiService = setUpRetrofit().create(ApiService.class);
+            apiService = getRetrofitInstance().create(ApiService.class);
         }
 
         return apiService;

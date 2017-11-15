@@ -1,4 +1,4 @@
-package com.example.cobeosijek.premierleague.player_info;
+package com.example.cobeosijek.premierleague.ui.player_info;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,13 +9,14 @@ import android.widget.TextView;
 
 import com.example.cobeosijek.premierleague.R;
 import com.example.cobeosijek.premierleague.data.models.Player;
-import com.example.cobeosijek.premierleague.team_list.TeamListActivity;
+import com.example.cobeosijek.premierleague.presentation.PlayerInfoPresenter;
+import com.example.cobeosijek.premierleague.ui.team_list.TeamListView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class PlayerInfoActivity extends AppCompatActivity implements PlayerInfoInterface.View {
+public class PlayerInfoView extends AppCompatActivity implements PlayerInfoInterface.View {
 
     private static String KEY_PLAYER_PLAYER_INFO = "id";
 
@@ -46,7 +47,7 @@ public class PlayerInfoActivity extends AppCompatActivity implements PlayerInfoI
     PlayerInfoInterface.Presenter presenter;
 
     public static Intent getLaunchIntent(Context from, Player player) {
-        Intent intent = new Intent(from, PlayerInfoActivity.class);
+        Intent intent = new Intent(from, PlayerInfoView.class);
         intent.putExtra(KEY_PLAYER_PLAYER_INFO, player);
 
         return intent;
@@ -89,7 +90,7 @@ public class PlayerInfoActivity extends AppCompatActivity implements PlayerInfoI
 
     @Override
     public void navigateHome() {
-        startActivity(TeamListActivity.onLaunchIntent(this).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+        startActivity(TeamListView.onLaunchIntent(this).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         finish();
     }
 
